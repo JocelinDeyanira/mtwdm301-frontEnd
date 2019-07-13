@@ -1,0 +1,37 @@
+
+<!-- {{clientList | json}} -->
+
+<div id="wrapper">
+  <!-- Sidebar section -->
+  <app-sidebar></app-sidebar>
+
+  <div id="page-wrapper" class="gray-bg">
+    <!-- Navbar section -->
+    <app-navbar></app-navbar>
+    <div class="wrapper wrapper-content">
+      <!-- Router section -->
+        <router-outlet>
+        </router-outlet>
+    </div>
+    <!-- Footer section -->
+    <app-footer></app-footer>
+  </div>
+  <!-- Right Sidebar Section -->
+  <app-rightsidebar></app-rightsidebar>
+</div>
+
+
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center"> -->
+
+<!-- <div>
+  <div>
+    <div style="display: block">
+       <canvas baseChart
+        [data]="doughnutChartData"
+        [labels]="doughnutChartLabels"
+        [chartType]="doughnutChartType">
+      </canvas> 
+    </div>
+  </div>
+</div> -->
