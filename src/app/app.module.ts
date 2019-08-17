@@ -1,34 +1,36 @@
+// Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ChartsModule } from 'ng2-charts';
-
+import { PagesModule } from './pages/pages.module';
+// Firebase Modules
+import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// Routes
 import { AppRoutingModule } from './app-routing.module';
+// Components
+import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/common/navbar/navbar.component';
-import { SidebarComponent } from './components/common/sidebar/sidebar.component';
-import { HeaderComponent } from './components/common/header/header.component';
-import { FooterComponent } from './components/common/footer/footer.component';
-import { RightsidebarComponent } from './components/common/rightsidebar/rightsidebar.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+// Environment variables
+import { environment } from 'src/environments/environment';
 
 @NgModule({
-  declarations: [
+  declarations: [LoginComponent,
     AppComponent,
-    NavbarComponent,
-    SidebarComponent,
-    HeaderComponent,
-    FooterComponent,
-    RightsidebarComponent,
-    DashboardComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ChartsModule
+    PagesModule,
+    AngularFireModule,
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [
+    { provide: FirebaseOptionsToken, useValue: environment.SETTINGS.FIREBASE }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

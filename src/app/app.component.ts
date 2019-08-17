@@ -35,5 +35,5 @@ export class AppComponent {
   //   })
   // }
 
-  title = 'cubo-dashboard';
+  title = 'ProyectoFinal';
 }

@@ -1,118 +1,104 @@
-<div class="row  border-bottom white-bg dashboard-header">
+<div id="content">
+        <div class="container-fluid outer">
+                 <div class="row-fluid">
+                     <div class="span12 inner">
 
-    <div class="col-md-4">
-        <h2>Welcome Amelia</h2>
-        <small>You have 42 messages and 6 notifications.</small>
-
-        <!-- <option *ngFor="let category of categories" value="{{category.key}}">{{category.value}}</option>
- -->
-
-        <ul class="list-group clear-list m-t">
-
-            <li  class="list-group-item" *ngFor="let key of doughnutChartLabels; let i = index">
-                <span class="float-right">
-                        {{doughnutChartData[i]}}
-                </span>
-                <span class="label label-{{colors[i]}}" >{{order[i]}}</span>
-                <a href="javascript:void(0)" (click)="selectedItem(selectCategory.value, doughnutChartLabels[i])">{{doughnutChartLabels[i]}}</a>
-            </li>
-
-            <!-- <li class="list-group-item fist-item">
-                <span class="float-right">
-                    09:00 pm
-                </span>
-                <span class="label label-success">1</span> Please contact me
-            </li>
-            <li class="list-group-item">
-                <span class="float-right">
-                    10:16 am
-                </span>
-                <span class="label label-info">2</span> Sign a contract
-            </li>
-            <li class="list-group-item">
-                <span class="float-right">
-                    08:22 pm
-                </span>
-                <span class="label label-primary">3</span> Open new shop
-            </li>
-            <li class="list-group-item">
-                <span class="float-right">
-                    11:06 pm
-                </span>
-                <span class="label label-default">4</span> Call back to Sylvia
-            </li>
-            <li class="list-group-item">
-                <span class="float-right">
-                    12:00 am
-                </span>
-                <span class="label label-primary">5</span> Write a letter to Sandra
-            </li> -->
-        </ul>
-    </div>
-    <div class="col-md-8">
-        <div class="statistic-box">
-        <h4>
-            Project Beta progress
-        </h4>
-        <p>
-            You have two project with not compleated task.
-        </p>
-        <br>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Top5</label>
-            <div class="col-sm-4">
-            <select #selectCategory class="form-control" name="type" (change)="selectTop5(selectCategory.value)">
-                <option *ngFor="let category of categories" value="{{category.key}}">{{category.value}}</option>
-
-                    <!-- <option value="Clientes">Clientes</option>
-                    <option value="Productos">Productos</option>
-                    <option value="Categorías">Categorías</option>
-                    <option value="Empleados">Empleados</option> -->
-                </select>
-            </div>
-        </div> 
-          <br>
-            <div class="row text-center">
-                <div class="col-lg-12">
-                    <div>
-                        <div>
-                          <div style="display: block" *ngIf="doughnutChartData">
+                     <div class="inner bg-light lter">
+                        <div class="form-group">
+                            <h1 class="c-btn-text">Top 5</h1>
+                           
+                             <div class="col-sm-4">
+                             <select #selectCategory class="form-control c-btn" name="type" (change)="selectTop5(selectCategory.value)">
+                                 <option *ngFor="let category of categories" value="{{category.key}}">{{category.value}}</option>
+                                 </select>
+                                 <div *ngIf="itemList">
+                                    <angular2-multiselect [data]="itemList" 
+                                          [(ngModel)]="selectedItems" 
+                                          [settings]="settings" 
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)" 
+                                          (onSelectAll)="onSelectAll($event)" 
+                                          (onDeSelectAll)="onDeSelectAll($event)">
+                                    </angular2-multiselect>
+                                </div>
+                             </div>
+                             
+                         </div> 
+                     
+                       <div class="tacPadre box">
+                       <div class="tac" *ngFor="let key of doughnutChartLabels; let i = index" >
+                           <a class="quick-btn auto" >
+                                
+                             <i class="label label-{{colors[i]}}">{{order[i]}}</i>
+                             <div class="box">
+                               <div class="label-{{colors[i]}}" style="color: #ffffff">
+                                  <span> {{doughnutChartData[i]}}</span>
+                               </div>
+                                
+                                <a class="auto" href="javascript:void(0)" (click)="selectedItem(selectCategory.value, doughnutChartLabels[i])"><br>{{   doughnutChartLabels[i]}}</a>
+                             </div>
+                             
+                           </a>
+                       </div>
+                       </div>
+                         <br>
+                     <hr>
+                     <div class="box">
+                        <header>
+                      <h5>Top 5</h5>
+                        </header>
+                        <div style="display: block" *ngIf="doughnutChartData">
                             <canvas baseChart
                               [data]="doughnutChartData"
                               [labels]="doughnutChartLabels"
                               [chartType]="doughnutChartType">
                             </canvas> 
                           </div>
-                        </div>
-                      </div>
-                </div>
-            </div>
-            <div class="m-t">
-                <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-            </div>
+                    </div>
+                    
+                     
+ 
+                                           <br>
+                                           <hr>
+                                           <div class="box">
+                                              <header>
+                                            <h5>Historical</h5>
+                                              </header>
+                                              <div style="display: block" *ngIf="barChartData">
+                                                  <canvas baseChart
+                                                    [datasets]="barChartData"
+                                                    [labels]="barChartLabels"
+                                                    [options]="barChartOptions"
+                                                    [plugins]="barChartPlugins"
+                                                    [legend]="barChartLegend"
+                                                    [chartType]="barChartType">
+                                                  </canvas>
+                                                </div>
+                                          </div>
 
-        </div>
-    </div>
+                                          <br>   
+                                          <hr>
+                                               <div class="box">
+                                                 <header>
+                                               <h5>Comparative</h5>
+                                                 </header>
+                                                   <div style="display: block" *ngIf="lineChartData">
+                                                     <canvas baseChart
+                                                                 [datasets]="lineChartData"
+                                                                 [labels]="lineChartLabels"
+                                                                 [options]="lineChartOptions"
+                                                                 [colors]="lineChartColors"
+                                                                 [legend]="lineChartLegend"
+                                                                 [chartType]="lineChartType"
+                                                                 [plugins]="lineChartPlugins"
+                                                                 (chartHover)="chartHovered($event)"
+                                                                 (chartClick)="chartClicked($event)"></canvas>
+                                                 </div>
+                                             </div>
+                     </div>
 
-    <div class="col-md-12">
-        <div class="statistic-box">
-            <div class="row text-center">
-                <div class="col-lg-12">
-                    <div>
-                        <div>
-                            <div style="display: block" *ngIf="barChartData">
-                                <canvas baseChart
-                                  [datasets]="barChartData"
-                                  [labels]="barChartLabels"
-                                  [options]="barChartOptions"
-                                  [plugins]="barChartPlugins"
-                                  [legend]="barChartLegend"
-                                  [chartType]="barChartType">
-                                </canvas>
-                              </div>
-                        </div>
-                      </div>
+                            </div>
+
+                    </div> 
                 </div>
-            </div>
         </div>
-    </div>
