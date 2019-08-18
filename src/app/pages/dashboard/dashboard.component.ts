@@ -239,7 +239,7 @@ public createLineChart() {
   }
 
   //console.log(postTablaComparativa);
-    this.http.post('http://localhost/API.Northwind/v1/Dashboard/Northwind/TablaComparativa', 
+    this.http.post('http://104.40.0.39/API.Northwind/v1/Dashboard/Northwind/TablaComparativa', 
       postTablaComparativa
     ).subscribe((data:any) => {
       
@@ -297,6 +297,35 @@ public createLineChart() {
       this.barChartLabels = data.months;
       this.barChartData = [{ data: data.values, label: "Historico de " + titulo}];
     })
+
+    this.combos = [];
+    this.itemList = [];
+
+    this.http.post('http://104.40.0.39/API.Northwind/v1/Dashboard/Northwind/Combos', 
+      postData
+    ).subscribe((data:any) => {
+      // console.log("resultado de combos");
+      // console.log(data);
+
+      for (var key in data) {
+        this.combos.push(data[key])
+    }
+
+      // console.log(this.combos);
+
+      
+      for (var i = 0, len = this.combos.length; i < len; i++) {
+
+        var elemento = "";
+        elemento = "{ \"id\": " + (i + 1) + ", \"itemName\": \"" + this.combos[i] + "\"" +  "}";
+        // console.log(this.combos[i]);
+        // console.log(elemento);
+
+        this.itemList.push(JSON.parse(elemento));
+      }
+
+    })
+    
 
     // this.http.post('http://localhost/API.Northwind/v1/Dashboard/Northwind/SerieHistorica/' + option + '/0', '', {})
     // .subscribe((result:any) => {
